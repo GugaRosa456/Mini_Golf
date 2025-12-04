@@ -70,11 +70,12 @@ public class Tacada : MonoBehaviour
                     GetComponent<Rigidbody>().AddForce(
                         new Vector3(2 * x, 0, 2 * z),
                         ForceMode.Impulse);
-                    lr.enabled = false;
-                    // if (GameManager.gm)
-                    //    G
-                }
 
+                   
+                    ScoreManager.instance.AdicionarPonto();
+
+                    lr.enabled = false;
+                }
             }
         }
     }
