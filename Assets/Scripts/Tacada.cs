@@ -70,11 +70,11 @@ public class Tacada : MonoBehaviour
                     GetComponent<Rigidbody>().AddForce(
                         new Vector3(2 * x, 0, 2 * z),
                         ForceMode.Impulse);
-
-                   
-                    ScoreManager.instance.AdicionarPonto();
-
                     lr.enabled = false;
+
+                    // ✅ Conta a tacada no GameManager
+                    if (GameManager.gm != null)
+                        GameManager.gm.tacada();
                 }
             }
         }

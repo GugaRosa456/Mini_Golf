@@ -3,9 +3,24 @@ using UnityEngine.SceneManagement;
 
 public class PontoInicial : MonoBehaviour
 {
+    private bool podeReiniciar = true;
+
+    private void Start()
+    {
+        // Espera 1 segundo antes de permitir reinício
+        Invoke(nameof(AtivarReinicio), 1f);
+    }
+
+    private void AtivarReinicio()
+    {
+        podeReiniciar = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        // Reinicia a cena quando encostar em um trigger
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (podeReiniciar && other.CompareTag("Player"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }
