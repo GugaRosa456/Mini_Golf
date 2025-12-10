@@ -25,10 +25,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        tacadas = 0;
+        // 🔥 Carrega tacadas salvas temporariamente
+        CarregarTacadasTemporarias();
 
         // Define par por fase
         string cenaAtual = SceneManager.GetActiveScene().name;
+
         if (cenaAtual == "Fase1") par = 3;
         else if (cenaAtual == "Fase2") par = 4;
         else par = 5;
@@ -36,13 +38,15 @@ public class GameManager : MonoBehaviour
         // Carrega recorde salvo
         recorde = PlayerPrefs.GetInt("Recorde_" + cenaAtual, int.MaxValue);
 
-        // Atualiza UI inicial
         AtualizarUI();
 
-        // 🔥 Limpa o placar final ao iniciar a fase
         if (textResultadoFinal != null)
             textResultadoFinal.text = "";
     }
+
+    // ===========================================================
+    // SISTEMA DE TACADAS
+    // ===========================================================
 
     public void tacada()
     {
@@ -50,15 +54,45 @@ public class GameManager : MonoBehaviour
         AtualizarUI();
     }
 
+    // 🔥 SALVA TACADAS AO MORRER / REINICIAR
+    public void SalvarTacadasTemporarias()
+    {
+        PlayerPrefs.SetInt("TacadasTemp", tacadas);
+        PlayerPrefs.Save();
+    }
+
+    // 🔥 CARREGA TACADAS QUANDO A FASE REINICIA
+    public void CarregarTacadasTemporarias()
+    {
+        tacadas = PlayerPrefs.GetInt("TacadasTemp", 0);
+    }
+
+    // 🔥 LIMPA TACADAS TEMPORÁRIAS QUANDO ZERA FASE
+    public void LimparTacadasTemporarias()
+    {
+        PlayerPrefs.DeleteKey("TacadasTemp");
+    }
+
+    // ===========================================================
+    // UI
+    // ===========================================================
+
     private void AtualizarUI()
     {
         if (textTacadas != null) textTacadas.text = "Tacadas: " + tacadas;
         if (textPar != null) textPar.text = "Par: " + par;
+
         if (textRecorde != null)
         {
-            textRecorde.text = (recorde == int.MaxValue) ? "Recorde: -" : "Recorde: " + recorde;
+            textRecorde.text = (recorde == int.MaxValue)
+                ? "Recorde: -"
+                : "Recorde: " + recorde;
         }
     }
+
+    // ===========================================================
+    // FINALIZAÇÃO DE FASE
+    // ===========================================================
 
     public void FinalizarFase()
     {
@@ -73,14 +107,18 @@ public class GameManager : MonoBehaviour
                 "Tacadas: " + tacadas + " | Par: " + par;
         }
 
-        // Atualiza recorde se for melhor
+        // Atualiza recorde
         string cenaAtual = SceneManager.GetActiveScene().name;
+
         if (tacadas < recorde)
         {
             recorde = tacadas;
             PlayerPrefs.SetInt("Recorde_" + cenaAtual, recorde);
             PlayerPrefs.Save();
         }
+
+        // 🔥 FINALIZOU A FASE → limpar tacadas temporárias
+        LimparTacadasTemporarias();
 
         AtualizarUI();
     }
