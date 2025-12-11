@@ -23,7 +23,15 @@ public class Tacada : MonoBehaviour
     void Update()
     {
         velocidade = rb.velocity.magnitude;
-        if (velocidade < 0.05)
+
+        // 🔥 Freio leve para parar mais rápido
+        if (velocidade < 1f)
+        {
+            rb.velocity *= 0.90f;
+        }
+
+        // 🔥 A bola pode jogar de novo antes (0.20 ao invés de 0.05)
+        if (velocidade < 0.20f)
         {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
@@ -55,10 +63,9 @@ public class Tacada : MonoBehaviour
                     pf = t.position;
                     x = (pi.x - pf.x) * 0.03f;
                     z = (pi.y - pf.y) * 0.03f;
-                    if (x > maxX)
-                        x = maxX;
-                    if (z > maxZ)
-                        z = maxZ;
+                    if (x > maxX) x = maxX;
+                    if (z > maxZ) z = maxZ;
+
                     lr.SetPosition(1, new Vector3(
                         transform.position.x + x,
                         transform.position.y,
@@ -67,12 +74,9 @@ public class Tacada : MonoBehaviour
 
                 if (t.phase == TouchPhase.Ended)
                 {
-                    GetComponent<Rigidbody>().AddForce(
-                        new Vector3(2 * x, 0, 2 * z),
-                        ForceMode.Impulse);
+                    rb.AddForce(new Vector3(2 * x, 0, 2 * z), ForceMode.Impulse);
                     lr.enabled = false;
 
-                    // ✅ Conta a tacada no GameManager
                     if (GameManager.gm != null)
                         GameManager.gm.tacada();
                 }
