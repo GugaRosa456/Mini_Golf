@@ -393,15 +393,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 279053179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e5322b9043594441b82cf51d4d94d33, type: 3}
+  m_Script: {fileID: 11500000, guid: d6bc3d01c7e927e4baa76f90e66dfd2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textTacadas: {fileID: 605334335}
-  textPar: {fileID: 576270003}
-  textRecorde: {fileID: 181066783}
-  textResultadoFinal: {fileID: 1542267622}
-  tacadas: 0
-  par: 0
+  nomeDaCena: Menu
+  tempoEspera: 3
 --- !u!1001 &345346606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1022,6 +1018,7 @@ GameObject:
   m_Component:
   - component: {fileID: 838348271}
   - component: {fileID: 838348270}
+  - component: {fileID: 838348272}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1065,6 +1062,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &838348272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838348269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7840c48ab32a9a245b2243a92969a39c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,8 +1732,8 @@ GameObject:
   - component: {fileID: 2105202232}
   - component: {fileID: 2105202231}
   - component: {fileID: 2105202240}
-  - component: {fileID: 2105202241}
   - component: {fileID: 2105202242}
+  - component: {fileID: 2105202243}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Player
@@ -1988,7 +1997,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7840c48ab32a9a245b2243a92969a39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2105202241
+--- !u!114 &2105202242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105202230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 599a0ec79b159dc48b36df8157d52feb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxX: 1
+  maxZ: 3
+--- !u!114 &2105202243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2006,20 +2029,6 @@ MonoBehaviour:
   textResultadoFinal: {fileID: 1542267622}
   tacadas: 0
   par: 0
---- !u!114 &2105202242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2105202230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 599a0ec79b159dc48b36df8157d52feb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxX: 1
-  maxZ: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
